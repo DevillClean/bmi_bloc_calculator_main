@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/blocs/bmi_calculate_cubit/calculate_bmi_cubit.dart';
-import 'package:flutter_application_2/views/ui/widget.dart';
+import 'package:flutter_application_2/views/ui/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BmiButton extends StatelessWidget {

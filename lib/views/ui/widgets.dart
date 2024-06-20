@@ -21,17 +21,6 @@ BoxDecoration decorationBox(BuildContext context) {
   );
 }
 
-Widget ageContainer(BuildContext context, IconData icon) {
-  return Container(
-    decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(6)),
-    child: Icon(
-      icon,
-      color: const Color.fromARGB(255, 186, 184, 184),
-    ),
-  );
-}
 
 SnackBar showSnackBar(BuildContext context, String bmiValue, String bmiStatus,
     String bmiComment) {

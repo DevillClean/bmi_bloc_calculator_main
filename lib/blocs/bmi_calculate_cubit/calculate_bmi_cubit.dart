@@ -4,7 +4,7 @@ part 'calculate_bmi_state.dart';
 
 class CalculateBmiCubit extends Cubit<CalculateBmiState> {
   CalculateBmiCubit()
-      : super(CalculateBmiInitialState(bmi: 0, status: '', comment: ''));
+    : super(CalculateBmiInitialState(bmi: 0, status: '', comment: ''));
 
   int height = 10;
   int weight = 10;
@@ -22,7 +22,7 @@ class CalculateBmiCubit extends Cubit<CalculateBmiState> {
     double bmi = ((weight / ((height / 100) * (height / 100))));
     if (bmi < 18) {
       String comment =
-          "This indicates that you are underweight, \nso you may need to put on some weight. \nYou are recommended to ask your doctor or a dietitian for advice.";
+          "This indicates that you are underweight, \nso you may need to put on some weight. You are recommended to ask your doctor or a dietitian for advice.";
       String conditon = 'Severely underweight';
       emit(CalculateBmiChangedState(
           bmi: bmi, comment: comment, status: conditon));

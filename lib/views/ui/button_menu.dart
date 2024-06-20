@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class Header extends StatelessWidget {
-  const Header({
+class MenuButton extends StatelessWidget {
+  const MenuButton({
     super.key,
   });
 
