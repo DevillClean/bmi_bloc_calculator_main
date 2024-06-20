@@ -30,7 +30,7 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers:[
+      providers: [
         BlocProvider(create: (BuildContext context) => HeightCubit()),
         BlocProvider(create: (BuildContext context) => AgeCubit()),
         BlocProvider(create: (BuildContext context) => CalculateBmiCubit()),
@@ -44,242 +44,272 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
             ScaffoldMessenger.of(context).showSnackBar(errorSnackBar(context));
           }
         },
-        child: Scaffold(
-          backgroundColor: bgk,
-          body: SafeArea(
-            child: Column(
-              children: [
-                const Header(),
-                const Text('123'),
-                Expanded(
-                  child: Row(
-                    children:[
-                      Expanded(
-                        child: Cards(
-                          color: gender == Gender.male
-                              ? activeCardColor
-                              : inactiveCardColor,
-                          callback: () {
-                            setState(
-                              () {
-                                gender = Gender.male;
-                              },
-                            );
-                          },
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(FontAwesomeIcons.mars, size: 90),
-                              SizedBox(height: 5),
-                              Text(
-                                'MALE',
-                                style: bodyTextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Cards(
-                          color: gender == Gender.female
-                              ? activeCardColor
-                              : inactiveCardColor,
-                          callback: () {
-                            setState(() {
-                              gender = Gender.female;
-                            });
-                          },
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(FontAwesomeIcons.venus, size: 90),
-                              SizedBox(height: 5),
-                              Text(
-                                'FEMALE',
-                                style: bodyTextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Cards(
-                  callback: () {},
-                  child: Row(
-                    children: [
-                     Expanded(
-                       child: Cards(
-                         callback: () {},
-                         child: BlocBuilder<HeightCubit, HeightState>(
-                           builder: (context, state) {
-                             return Column(
-                               children: [
-                                 const SizedBox(height: 3),
-                                 const Text('HEIGHT', style: bodyTextStyle),
-                                 Text(state.height.toString(),
-                                     style: numberTextStyle),
-                                 Slider(
-                                   min: 40,
-                                   max: 220,
-                                   activeColor: bottomContainerColor,
-                                   value: height,
-                                   onChanged: (value) {
-                                     height = value;
-                                     context
-                                         .read<HeightCubit>()
-                                         .onHeightChanged(height.toInt());
-                                     heigh = height.toInt();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                   ),
-                  ),
-                ),
-                Expanded(
-                  child: Row(
+        child: BlocBuilder<AgeCubit, AgeState>(
+          builder: (context, state) {
+            return Scaffold(
+              backgroundColor: bgk,
+              body: SafeArea(
+                child: Column(
                   children: [
+                    const Header(),
+                    BlocBuilder<CalculateBmiCubit, CalculateBmiState>(
+                      builder: (context, state) {
+                        final bmi = state.bmi;
+                        return Text('$bmi');
+                      },
+                    ),
                     Expanded(
-                      child: Cards(
-                        callback: () {},
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'WEIGHT',
-                              style: bodyTextStyle,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              width: 180,
-                              height: 130,
-                              decoration: decorationBox(context),
-                              child: Column(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Cards(
+                              color: gender == Gender.male
+                                  ? activeCardColor
+                                  : inactiveCardColor,
+                              callback: () {
+                                setState(
+                                  () {
+                                    gender = Gender.male;
+                                  },
+                                );
+                              },
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.026,
-                                  ),
-                                  TextFormField(
-                                    controller: weightController,
-                                    maxLength: 3,
-                                    onChanged: (value) {
-                                      if (value.isEmpty) {
-                                      } else {
-                                        int value =
-                                            int.parse(weightController.text);
-                                        weight = value;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: const Color.fromARGB(
-                                          196, 204, 199, 199),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          borderSide: BorderSide.none),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          borderSide: const BorderSide(
-                                              color: Colors.grey)),
-                                    ),
+                                  Icon(FontAwesomeIcons.mars, size: 90),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'MALE',
+                                    style: bodyTextStyle,
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Expanded(
+                            child: Cards(
+                              color: gender == Gender.female
+                                  ? activeCardColor
+                                  : inactiveCardColor,
+                              callback: () {
+                                setState(() {
+                                  gender = Gender.female;
+                                });
+                              },
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(FontAwesomeIcons.venus, size: 90),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'FEMALE',
+                                    style: bodyTextStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                  ),
+                    ),
                     Expanded(
                       child: Cards(
                         callback: () {},
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Row(
                           children: [
-                            const Text(
-                              'AGE',
-                              style: bodyTextStyle,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              width: 180,
-                              height: 130,
-                              decoration: decorationBox(context),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.grey,
-                                        child:
-                                            ageContainer(context, Icons.remove),
-                                        onTap: () {
-                                          context
-                                              .read<AgeCubit>()
-                                              .ageDecrement();
-                                        },
-                                      ),
-                                      BlocBuilder<AgeCubit, AgeState>(
-                                        builder: (context, state) {
-                                          age = state.age;
-                                          return appText(
-                                              context,
-                                              state.age.toString(),
-                                              30,
-                                              Colors.white);
-                                        },
-                                      ),
-                                      InkWell(
-                                        splashColor: Colors.grey,
-                                        child: ageContainer(context, Icons.add),
-                                        onTap: () {
-                                          context
-                                            .read<AgeCubit>()
-                                            .ageIncrement();
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                ],
+                            Expanded(
+                              child: Cards(
+                                callback: () {},
+                                child: BlocBuilder<HeightCubit, HeightState>(
+                                  builder: (context, state) {
+                                    return Column(
+                                      children: [
+                                        const SizedBox(height: 3),
+                                        const Text('HEIGHT',
+                                            style: bodyTextStyle),
+                                        Text(state.height.toString(),
+                                            style: numberTextStyle),
+                                        Slider(
+                                          min: 40,
+                                          max: 220,
+                                          activeColor: bottomContainerColor,
+                                          value: height,
+                                          onChanged: (value) {
+                                            height = value;
+                                            context
+                                                .read<HeightCubit>()
+                                                .onHeightChanged(
+                                                    height.toInt());
+                                            heigh = height.toInt();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                   ],
-                  ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Cards(
+                              callback: () {},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'WEIGHT',
+                                    style: bodyTextStyle,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    width: 180,
+                                    height: 130,
+                                    decoration: decorationBox(context),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.026,
+                                        ),
+                                        TextFormField(
+                                          controller: weightController,
+                                          maxLength: 3,
+                                          onChanged: (value) {
+                                            if (value.isEmpty) {
+                                            } else {
+                                              int value = int.parse(
+                                                  weightController.text);
+                                              weight = value;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: const Color.fromARGB(
+                                                196, 204, 199, 199),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                borderSide: BorderSide.none),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.grey)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Cards(
+                              callback: () {},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'AGE',
+                                    style: bodyTextStyle,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    width: 180,
+                                    height: 130,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            RawMaterialButton(
+                                              onPressed: () {
+                                                BlocProvider.of<AgeCubit>(
+                                                        context)
+                                                    .ageDecrement();
+                                              },
+                                              shape: const CircleBorder(),
+                                              constraints:
+                                                  const BoxConstraints.tightFor(
+                                                      width: 46.0,
+                                                      height: 46.0),
+                                              elevation: 10,
+                                              fillColor:
+                                                  const Color(0xFF222747),
+                                              padding: const EdgeInsets.all(5),
+                                              child: const Icon(
+                                                  FontAwesomeIcons.minus),
+                                            ),
+                                            BlocBuilder<AgeCubit, AgeState>(
+                                              builder: (context, state) {
+                                                age = state.age;
+                                                return appText(
+                                                    context,
+                                                    state.age.toString(),
+                                                    30,
+                                                    Colors.white);
+                                              },
+                                            ),
+                                            RawMaterialButton(
+                                              onPressed: () {
+                                                BlocProvider.of<AgeCubit>(
+                                                        context)
+                                                    .ageIncrement();
+                                              },
+                                              shape: const CircleBorder(),
+                                              constraints:
+                                                  const BoxConstraints.tightFor(
+                                                      width: 46.0,
+                                                      height: 46.0),
+                                              elevation: 10,
+                                              fillColor:
+                                                  const Color(0xFF222747),
+                                              padding: const EdgeInsets.all(5),
+                                              child: const Icon(
+                                                  FontAwesomeIcons.plus),
+                                            ),
+                                            const SizedBox(width: 15),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    BmiButton(age: age, heigh: heigh, weight: weight),
+                    const SizedBox(height: 5),
+                  ],
                 ),
-                const SizedBox(height: 3),
-                BmiButton(age: age, heigh: heigh, weight: weight),
-                const SizedBox(height: 5),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 }
-
-

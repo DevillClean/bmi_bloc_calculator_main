@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final AppRouter _instance = AppRouter._privateConstructor();
-
   static late GoRouter router;
 
   AppRouter._privateConstructor() {

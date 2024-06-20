@@ -16,4 +16,6 @@ class AgeCubit extends Cubit<AgeState> {
       emit(AgeChangedState(age: (state.age - 1)));
     }
   }
+
+  void add(ageIncrement) {}
 }
