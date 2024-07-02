@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/presentation/screens/screen_1/bloc/bmi_bloc.dart';
-import 'package:flutter_application_2/presentation/widgets/widgets.dart';
+import 'package:flutter_application_2/theme/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BmiButton extends StatelessWidget {

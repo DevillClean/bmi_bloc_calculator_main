@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/presentation/screens/screen_1/bmi_calculator_screen.dart';
-import 'package:flutter_application_2/presentation/widgets/custom_button.dart';
-import 'package:flutter_application_2/presentation/widgets/custom_text_field.dart';
+import 'package:flutter_application_2/presentation/screens/screen_3/widgets/custom_button.dart';
+import 'package:flutter_application_2/presentation/screens/screen_3/widgets/custom_text_field.dart';
 import 'package:flutter_application_2/services/authentication.dart';
 import 'package:flutter_application_2/theme/styles.dart';
 
@@ -19,16 +19,12 @@ class _AuthScreenState extends State<AuthScreen> {
   final loginController = TextEditingController();
   final passwordController = TextEditingController();
 
- 
-
   @override
   void initState() {
     isMounted = true;
     super.initState();
   }
-
- 
-
+  
   void loginUser() async {
     setState(() {
       isLoading = true;
@@ -53,6 +49,7 @@ class _AuthScreenState extends State<AuthScreen> {
       });
     }
   }
+
   void safeSetState(VoidCallback fn) {
     if (isMounted) {
       setState(fn);
@@ -60,12 +57,12 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   @override
-    void dispose() {
-      isMounted = false;
-      loginController.dispose();
-      passwordController.dispose();
-      super.dispose();
-    }
+  void dispose() {
+    isMounted = false;
+    loginController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

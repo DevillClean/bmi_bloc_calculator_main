@@ -3,7 +3,7 @@ import 'package:flutter_application_2/presentation/screens/screen_1/bloc/bmi_blo
 import 'package:flutter_application_2/presentation/screens/screen_1/widgets/bmi_button.dart';
 import 'package:flutter_application_2/presentation/screens/screen_1/widgets/bmi_gender.dart';
 import 'package:flutter_application_2/presentation/screens/screen_1/widgets/bmi_menu_buttons.dart';
-import 'package:flutter_application_2/presentation/widgets/cards.dart';
+import 'package:flutter_application_2/presentation/screens/screen_1/widgets/cards.dart';
 import 'package:flutter_application_2/theme/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
