@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/presentation/screens/screen_1/bmi_calculator_screen.dart';
+import 'package:flutter_application_2/data/authentication.dart';
 import 'package:flutter_application_2/presentation/screens/screen_3/widgets/custom_button.dart';
 import 'package:flutter_application_2/presentation/screens/screen_3/widgets/custom_text_field.dart';
-import 'package:flutter_application_2/services/authentication.dart';
 import 'package:flutter_application_2/theme/styles.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key, required this.onTab});
@@ -24,7 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
     isMounted = true;
     super.initState();
   }
-  
+
   void loginUser() async {
     setState(() {
       isLoading = true;
@@ -37,12 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() {
         isLoading = false;
       });
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const BmiCalculatorApp(),
-        ),
-      );
+
+      context.go('/home');
     } else {
       setState(() {
         isLoading = false;

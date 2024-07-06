@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color.fromARGB(255, 0, 8, 153);
 const inactiveCardColor = Color(0xFF161A3C);
